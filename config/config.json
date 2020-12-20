@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "lumenis-photo-gallery-wp-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/lumenisPhotoGalleryWp/LumenisPhotoGalleryWpWebPart.js",
+          "manifest": "./src/webparts/lumenisPhotoGalleryWp/LumenisPhotoGalleryWpWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "LumenisPhotoGalleryWpWebPartStrings": "lib/webparts/lumenisPhotoGalleryWp/loc/{locale}.js"
+  }
+}

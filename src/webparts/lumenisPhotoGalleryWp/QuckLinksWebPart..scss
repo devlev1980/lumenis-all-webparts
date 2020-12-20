@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+$background: #e3e3e3;
+$white_color: #fff;
+$main_color: #09294a;
+$title_background: #f0f0f0;
+
+
+#workbenchPageContent{
+  max-width: 1200px;
+  font-family: 'Open Sans',sans-serif;
+}
+.LinksWrapper{
+  h1{
+    text-align: center;
+    font-family: 'Open Sans',sans-serif;
+    font-weight: normal;
+    position: relative;
+    &:before,&:after{
+      content: "";
+      position: absolute;
+      top: 22px;
+      height: 1px;
+      width: 24%;
+      background: $main_color;
+    }
+    &:before{
+      right: 10%;
+    }
+    &:after{
+      left: 10%;
+    }
+  }
+}
+
+.LinksWrapper-Raw{
+  display: grid;
+  grid-template-columns: repeat(4,minmax(150px, 1fr));
+
+  .LinksTab{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  a{
+    color: $main_color;
+    text-decoration: none;
+  }
+}
