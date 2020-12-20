@@ -15,17 +15,22 @@ import {
 
 import * as pnp from 'sp-pnp-js';
 import {Web} from 'sp-pnp-js';
+import * as $ from 'jquery';
+import * as moment from 'moment';
+
 require('./LumenisNewUsefulLinksWebpart.scss');
 require('./QuckLinksWebPart..scss');
- require('./LumenisPhotoGalleryWpWebPart.module.scss');
-require('./PhotoGalleryWebPart.scss');
+require('./LumenisNewGreetingsWpWebPart.scss');
+//  require('./LumenisPhotoGalleryWpWebPart.module.scss');
+// require('./PhotoGalleryWebPart.scss');
 
 
 export interface ILumenisPhotoGalleryWpWebPartProps {
   // Usefull Links
-  wpTitle: string;
-  wpWebUrl: string;
-  listName: string;
+  description_UsefulLinks: string
+  wpTitle_UsefulLinks: string;
+  wpWebUrl_UsefulLinks: string;
+  listName_UsefulLinks: string;
   // QuickLinks Webpart
   Link1: string;
   Link1Text: string;
@@ -54,6 +59,16 @@ export interface ILumenisPhotoGalleryWpWebPartProps {
   Link9: string;
   Link9Text: string;
   LinkImage9: string;
+  // Greetings
+  descriptionGreetings: string;
+  listNameGreetings: string;
+  webUrlGreetings: string;
+  wpTitleGreetings: string;
+  sendYourGreetings: string;
+  separator: string;
+  daysBefore: string;
+  daysAfter: string;
+  displayDate: boolean;
 }
 
 export interface ISPLists {
@@ -73,64 +88,59 @@ export interface ISPField {
 }
 
 export default class LumenisPhotoGalleryWpWebPart extends BaseClientSideWebPart<ILumenisPhotoGalleryWpWebPartProps> {
-
-
-
-
+  private _newEmployeesListName = 'NewEmployees';
 
   public render(): void {
+    let d = new Date();
+    let thisTime = d.getTime();
+    //region All except greetings
     let NumberOfActiveLinks = 0;
-    if(this.properties.Link1!=""){
+    if (this.properties.Link1 != '') {
       NumberOfActiveLinks += 1;
     }
-    if(this.properties.Link2!=""){
+    if (this.properties.Link2 != '') {
       NumberOfActiveLinks += 1;
     }
-    if(this.properties.Link3!=""){
+    if (this.properties.Link3 != '') {
       NumberOfActiveLinks += 1;
     }
-    if(this.properties.Link4!=""){
+    if (this.properties.Link4 != '') {
       NumberOfActiveLinks += 1;
     }
-    if(this.properties.Link5!=""){
+    if (this.properties.Link5 != '') {
       NumberOfActiveLinks += 1;
     }
-    if(this.properties.Link6!=""){
+    if (this.properties.Link6 != '') {
       NumberOfActiveLinks += 1;
     }
-    if(this.properties.Link7!=""){
+    if (this.properties.Link7 != '') {
       NumberOfActiveLinks += 1;
     }
-    if(this.properties.Link8!=""){
+    if (this.properties.Link8 != '') {
       NumberOfActiveLinks += 1;
     }
 
-    if(NumberOfActiveLinks!=0 && NumberOfActiveLinks!=8){
-      NumberOfActiveLinks = (100- 12.5*NumberOfActiveLinks)/2;
-    }
-    else NumberOfActiveLinks = 0;
-    let html = `
-
-       `;
+    if (NumberOfActiveLinks != 0 && NumberOfActiveLinks != 8) {
+      NumberOfActiveLinks = (100 - 12.5 * NumberOfActiveLinks) / 2;
+    } else NumberOfActiveLinks = 0;
+    let html = ``;
     html += `
-<!--      <p id="LumenisUsefulLinksWpWebPartID" class="anchorinpage"></p>-->
-        <div class="all-webparts__container">
+        <div class="all-webparts__container" style="display: grid;grid-template-columns: 30% 1fr 30%;height: auto;max-width: 1600px ">
+        <div class="left__sidebar">
              <div class="container" id="usefulLinksWP">
-                <h3 id="usefulLinksWPTitle">${this.properties.wpTitle}</h3>
+                <h3 id="usefulLinksWPTitle">${this.properties.wpTitle_UsefulLinks}</h3>
                  <div class="useful_list"></div>
              </div>
-<!--            Quick links-->
-             <div class="LinksWrapper">
-                <h1 class="title">מידע לעובדים</h1>
-             </div>
+         </div> `;
 
-
-        </div>`;
 
     // Quick Links
-    if(this.properties.Link1!="")
-    {
-      html +=`
+    if (this.properties.Link1 != '') {
+      html += `
+<div class="main">
+  <div class="LinksWrapper">
+                <h1 class="title">מידע לעובדים</h1>
+             </div>
        <div class="LinksWrapper-Raw">
 <div class="LinksTab">
           <div class="LinkImage">
@@ -140,10 +150,10 @@ export default class LumenisPhotoGalleryWpWebPart extends BaseClientSideWebPart<
             <a href="${escape(this.properties.Link1)}">${escape(this.properties.Link1Text)}</a>
           </div>
         </div>`;
+
     }
-    if(this.properties.Link2 !="")
-    {
-      html +=`<div class="LinksTab">
+    if (this.properties.Link2 != '') {
+      html += `<div class="LinksTab">
           <div class="LinkImage">
             <a href="${escape(this.properties.Link2)}"><img class="ImageInLink" src="${escape(this.properties.LinkImage2)}"></a>
           </div>
@@ -152,9 +162,8 @@ export default class LumenisPhotoGalleryWpWebPart extends BaseClientSideWebPart<
           </div>
         </div>`;
     }
-    if(this.properties.Link3!="")
-    {
-      html +=`<div class="LinksTab">
+    if (this.properties.Link3 != '') {
+      html += `<div class="LinksTab">
           <div class="LinkImage">
             <a href="${escape(this.properties.Link3)}"><img class="ImageInLink" src="${escape(this.properties.LinkImage3)}"></a>
           </div>
@@ -163,9 +172,8 @@ export default class LumenisPhotoGalleryWpWebPart extends BaseClientSideWebPart<
           </div>
         </div>`;
     }
-    if(this.properties.Link4!="")
-    {
-      html +=`<div class="LinksTab">
+    if (this.properties.Link4 != '') {
+      html += `<div class="LinksTab">
           <div class="LinkImage">
             <a href="${escape(this.properties.Link4)}"><img class="ImageInLink" src="${escape(this.properties.LinkImage4)}"></a>
           </div>
@@ -174,9 +182,8 @@ export default class LumenisPhotoGalleryWpWebPart extends BaseClientSideWebPart<
           </div>
         </div>`;
     }
-    if(this.properties.Link5!="")
-    {
-      html +=`<div class="LinksTab">
+    if (this.properties.Link5 != '') {
+      html += `<div class="LinksTab">
           <div class="LinkImage">
             <a href="${escape(this.properties.Link5)}"><img class="ImageInLink" src="${escape(this.properties.LinkImage5)}"></a>
           </div>
@@ -185,9 +192,8 @@ export default class LumenisPhotoGalleryWpWebPart extends BaseClientSideWebPart<
           </div>
         </div>`;
     }
-    if(this.properties.Link6!="")
-    {
-      html +=`<div class="LinksTab">
+    if (this.properties.Link6 != '') {
+      html += `<div class="LinksTab">
           <div class="LinkImage">
             <a href="${escape(this.properties.Link6)}"><img class="ImageInLink" src="${escape(this.properties.LinkImage6)}"></a>
           </div>
@@ -196,9 +202,8 @@ export default class LumenisPhotoGalleryWpWebPart extends BaseClientSideWebPart<
           </div>
         </div>`;
     }
-    if(this.properties.Link7!="")
-    {
-      html +=`<div class="LinksTab">
+    if (this.properties.Link7 != '') {
+      html += `<div class="LinksTab">
           <div class="LinkImage">
             <a href="${escape(this.properties.Link7)}"><img class="ImageInLink" src="${escape(this.properties.LinkImage7)}"></a>
           </div>
@@ -207,9 +212,8 @@ export default class LumenisPhotoGalleryWpWebPart extends BaseClientSideWebPart<
           </div>
         </div>`;
     }
-    if(this.properties.Link8!="")
-    {
-      html +=`<div class="LinksTab">
+    if (this.properties.Link8 != '') {
+      html += `<div class="LinksTab">
           <div class="LinkImage">
             <a href="${escape(this.properties.Link8)}"><img class="ImageInLink" src="${escape(this.properties.LinkImage8)}"></a>
           </div>
@@ -218,37 +222,181 @@ export default class LumenisPhotoGalleryWpWebPart extends BaseClientSideWebPart<
           </div>
         </div>`;
     }
-    if(this.properties.Link9!="")
-    {
-      html +=`<div class="LinksTab">
+    if (this.properties.Link9 != '') {
+      html += `<div class="LinksTab">
           <div class="LinkImage">
             <a href="${escape(this.properties.Link9)}"><img class="ImageInLink" src="${escape(this.properties.LinkImage9)}"></a>
           </div>
           <div class="LinkText">
             <a href="${escape(this.properties.Link9)}">${escape(this.properties.Link9Text)}</a>
           </div>
-        </div></div`;
+        </div></div> </div>
+
+                          <!--        Right side bar-->
+ <div class="right__sidebar">
+            <p id="LumenisGreetingsWpWebPartID" class="anchorinpage"></p>
+             <div class="event_wrapper" id="greetingsWP">
+                <h3 class="WPtitle">${escape(this.properties.wpTitleGreetings)}</h3>
+                <div class="container WPevents" id="WPevents${thisTime}">
+                <div class="scrollEvents" id="scrollEvents${thisTime}"></div>
+
+        </div>
+    </div>
+
+</div> </div>'`;
     }
+    let greetingsList = this.properties.listNameGreetings;
+    console.log('greetingsList',greetingsList);
+    let query = this.Build(greetingsList);
+    let webUrl = this.properties.webUrlGreetings;
+    let sendYourGreetings = this.properties.sendYourGreetings;
+    let separator = this.properties.separator;
+    let absUrl = this.context.pageContext.site.absoluteUrl;
+    let web = pnp.sp.web;
 
+    if (webUrl != '') {
+      web = new Web(absUrl + webUrl);
+    } else {
+      web = new Web(absUrl);
+    }
+    web.get().then((w) => {
 
+      const q: any = {
+        ViewXml: query
+      };
+
+      web.lists.getByTitle(greetingsList).getItemsByCAMLQuery(q).then((r: any[]) => {
+        var _greetingsList = greetingsList;
+        r.forEach((result) => {
+          let _listName = _greetingsList;
+          let _isNewEmployee = _greetingsList == this._newEmployeesListName;
+          let itemTitle = result.Title;
+          let itemRole;
+          let itemEventType = result.EventType;
+          let itemEventAuthorId = result.EventAuthorId;
+          let itemMonth = result.EventMonth;
+          let itemDay = result.EventDay;
+          let babyGender = result.BabyGender;
+          if (itemEventType == null) {
+            itemEventType = 'birthday';
+          }
+          let mainID = result.ID;
+
+          let userEmail = '#';
+          let userPosition = '';
+
+          let eventImg = '';
+          let eventArrowImg = '';
+          switch (itemEventType) {
+            case 'birthday':
+              eventImg = 'birthdayIcon.png';
+              itemRole = `${itemDay}${separator}${itemMonth}  מזל טוב`;
+              eventArrowImg = 'pinkArrow.jpg';
+              break;
+            case 'newborn':
+              eventImg = 'handshakeIcon.png';
+              itemRole = 'ברוך הבא ללומניס';
+              eventArrowImg = 'darkBlueArrow.jpg';
+              break;
+            case 'wedding':
+              eventImg = 'weddingIcon.png';
+              itemRole = 'מזל טוב לנישואיך';
+              eventArrowImg = 'yellowArrow.jpg';
+              break;
+            case 'baby':
+              eventImg = 'strollerIcon.jpeg';
+              eventArrowImg = 'lightBlueArrow.jpg';
+              switch (babyGender) {
+                case 'בן':
+                  itemRole = 'מזל טוב להולדת הבן';
+                  break;
+                case 'בת':
+                  itemRole = 'מזל טוב להולדת הבת';
+                  break;
+              }
+              break;
+          }
+
+          let selectContainer: Element = this.domElement.querySelector(`#scrollEvents${thisTime}`);
+          if (this.properties.displayDate) {
+            selectContainer.insertAdjacentHTML('beforeend',
+              `<div class="grtmpitem eventItemNews ${itemEventType}" userId="${itemEventAuthorId}" useremail="" id=${mainID}>
+
+                <div class="celebrant_detailes">
+                    <div class="evt_ic">
+                        <img src="/Style Library/IMF.O365.Lumenis/img/${eventImg}">
+                    </div>
+                    <div class="info">
+                    <div class="user_name"></div>
+                     <span class="user_office">${itemRole}</span>
+
+</div>
+<!--<div class="eventDate">-->
+                    <div class="evt_ic">
+                        <img src="/Style Library/IMF.O365.Lumenis/img/${eventArrowImg}">
+<!--                   <div> <img src="/Style Library/IMF.O365.Lumenis/img/${eventImg}"></div>-->
+                     <a class="wish_btn" href="" title=""><br>${sendYourGreetings}</a>
+                    </div>
+                </div>
+                </div>
+
+                </div>`);
+          } else {
+            selectContainer.insertAdjacentHTML('beforeend',
+              `<div class="grtmpitem eventItemNews ${itemEventType}" userId="${itemEventAuthorId}" useremail="" id=${mainID}>
+
+                    <div class="celebrant_detailes">
+                        <div class="user_name"></div>
+                        <div class="user_office">${itemRole}</div>
+                        <a class="wish_btn" href="" title="">${sendYourGreetings}</a>
+                    </div>
+                    <div class="eventDate">
+                        <div class="evt_ic"><img src="/Style Library/IMF.O365.Lumenis/img/${eventImg}"></div>
+                    </div>
+                    </div>`);
+
+          }
+          var _picture = _isNewEmployee && result.Picture ? result.Picture : undefined;
+
+          if (itemEventAuthorId) {
+            web.siteUsers.getById(itemEventAuthorId).get().then(function (result) {
+              (function (result, picture) {
+                // console.log(mainID);
+                // console.log(result);
+                $(`#WPevents${thisTime} .eventItemNews#${mainID}`).attr('useremail', result.Email);
+                $(`#WPevents${thisTime} .eventItemNews#${mainID} .user_pic_date img`).attr('src', picture && picture.Url ? picture.Url : '/_vti_bin/DelveApi.ashx/people/profileimage?userId=' + result.Email);
+                $(`#WPevents${thisTime} .eventItemNews#${mainID} .celebrant_detailes .user_name`).text(result.Title);
+                $(`#WPevents${thisTime} .eventItemNews#${mainID} .celebrant_detailes .wish_btn`).attr('href', 'mailto:' + result.Email);
+              })(result, _picture);
+            });
+          } else if (_isNewEmployee && _picture && _picture.Url) {
+            $(`#WPevents${thisTime} .eventItemNews#${mainID} .celebrant_detailes .user_name`).text(itemTitle);
+            $(`#WPevents${thisTime} .eventItemNews#${mainID} .user_pic_date img`).attr('src', _picture.Url);
+            $(`#WPevents${thisTime} .eventItemNews#${mainID} .celebrant_detailes .wish_btn`).css('visibility', 'hidden');
+          }
+        });
+      });
+
+    }).catch((err) => {
+      console.log(err);
+    });
     this.domElement.innerHTML = html;
     this.renderLinks();
   }
 
   private renderLinks() {
-    let webUrl = this.properties.wpWebUrl;
-    let usefulLinksList = this.properties.listName;
+    let webUrl = this.properties.wpWebUrl_UsefulLinks;
+    let usefulLinksList = this.properties.listName_UsefulLinks;
     let absUrl = this.context.pageContext.site.absoluteUrl;
     let web = pnp.sp.web;
-    if (webUrl != "") {
+    if (webUrl != '') {
       web = new Web(absUrl + webUrl);
-    }
-    else {
+    } else {
       web = new Web(absUrl);
     }
 
     let resultContainer: Element = this.domElement.querySelector(`.useful_list`);
-    resultContainer.innerHTML = "";
+    resultContainer.innerHTML = '';
 
     const xml = `<View>
                     <Query>
@@ -271,12 +419,12 @@ export default class LumenisPhotoGalleryWpWebPart extends BaseClientSideWebPart<
 
     web.get().then(w => {
       web.lists.getByTitle(usefulLinksList).getItemsByCAMLQuery(q).then((r: any[]) => {
-        let html = "";
-        for(let idx = 0; idx <r.length; idx++){
+        let html = '';
+        for (let idx = 0; idx < r.length; idx++) {
 
           let result = r[idx];
-          if(idx % 3 == 0){
-            html += "";
+          if (idx % 3 == 0) {
+            html += '';
           }
           html += `
                         <div class='item'>
@@ -286,19 +434,215 @@ export default class LumenisPhotoGalleryWpWebPart extends BaseClientSideWebPart<
                             <a  target='_blank'  href='${result.Link}'>${result.Title}</a>
                        </div>
                   `;
-          if(idx % 3 == 2){
-            html += "</div>";
+          if (idx % 3 == 2) {
+            html += '</div>';
           }
         }
         //});
-        resultContainer.insertAdjacentHTML("beforeend", html);
+        resultContainer.insertAdjacentHTML('beforeend', html);
       })
         .catch(console.log);
     });
   }
 
+  public Build(listName): string {
+
+    let eventDay = parseInt(moment().add(-(parseInt(this.properties.daysBefore)), 'd').format('DD'));
+    let eventMonth = parseInt(moment().add(-(parseInt(this.properties.daysBefore)), 'd').format('MM'));
+
+    let nextDate = moment().add((parseInt(this.properties.daysAfter)), 'd');
+    let nextEventMonth = parseInt(nextDate.format('MM'));
+    let nextEventDay = parseInt(nextDate.format('DD'));
 
 
+    let firstMonthDays = [];
+    let secondMonthDays = [];
+
+    //next date is on the same month
+    if (nextEventMonth == eventMonth) {
+      let _i1 = 0;
+      for (let i1 = eventDay; i1 <= nextEventDay; i1++) {
+        firstMonthDays[_i1] = i1;
+        _i1 = _i1 + 1;
+      }
+    } else {
+
+      //next date is on next month
+      let _i = 0;
+      let _j = 0;
+      let tempDate = moment().add(-(parseInt(this.properties.daysBefore)), 'd');
+      while (tempDate.isSame(nextDate) || tempDate.isBefore(nextDate)) {
+        if (parseInt(tempDate.format('MM')) == eventMonth) {
+          firstMonthDays[_i] = parseInt(tempDate.format('DD'));
+          _i += 1;
+        } else {
+          secondMonthDays[_j] = parseInt(tempDate.format('DD'));
+          _j += 1;
+        }
+
+        tempDate = tempDate.add(1, 'd');
+      }
+    }
+
+    let _tempQuery = '';
+
+    if (secondMonthDays.length == 0) {
+
+      //build query for current month
+      let _in = '';
+      for (let i = 0; i < firstMonthDays.length; i++) {
+        _in += '<Value Type="Number">' + firstMonthDays[i] + '</Value>';
+      }
+      _tempQuery =
+        '<And>' +
+        '<And>' +
+        '<Eq>' +
+        '<FieldRef Name="EventMonth" />' +
+        '<Value Type="Number">' + eventMonth + '</Value>' +
+        '</Eq>' +
+        '<In>' +
+        '<FieldRef Name="EventDay" />' +
+        '<Values>' + _in + '</Values>' +
+        '</In>' +
+        '</And>' +
+        '<Or>' +
+        '<Or>' +
+        '<IsNull>' +
+        '<FieldRef Name="Expires" />' +
+        '</IsNull>' +
+        '<And>' +
+        '<IsNull>' +
+        '<FieldRef Name="EventType" />' +
+        '</IsNull>' +
+        '<Eq>' +
+        '<FieldRef Name="EventType" />' +
+        '<Value Type="Text">birthday</Value>' +
+        '</Eq>' +
+        '</And>' +
+        '</Or>' +
+        '<Gt>' +
+        '<FieldRef Name="Expires" />' +
+        '<Value Type="DateTime">' +
+        '<Today />' +
+        '</Value>' +
+        '</Gt>' +
+        '</Or>' +
+        '</And>';
+
+    } else {
+
+      //build query for 2 months
+      let _in_first = '';
+      let _in_second = '';
+
+      for (let i3 = 0; i3 < firstMonthDays.length; i3++) {
+        _in_first += '<Value Type="Number">' + firstMonthDays[i3] + '</Value>';
+      }
+      for (let i4 = 0; i4 < secondMonthDays.length; i4++) {
+        _in_second += '<Value Type="Number">' + secondMonthDays[i4] + '</Value>';
+      }
+      _tempQuery =
+        '<Or>' +
+        '<And>' +
+        '<And>' +
+        '<Eq>' +
+        '<FieldRef Name="EventMonth" />' +
+        '<Value Type="Number">' + eventMonth + '</Value>' +
+        '</Eq>' +
+        '<In>' +
+        '<FieldRef Name="EventDay" />' +
+        '<Values>' + _in_first + '</Values>' +
+        '</In>' +
+        '</And>' +
+        '<Or>' +
+        '<Or>' +
+        '<IsNull>' +
+        '<FieldRef Name="Expires" />' +
+        '</IsNull>' +
+        '<And>' +
+        '<IsNull>' +
+        '<FieldRef Name="EventType" />' +
+        '</IsNull>' +
+        '<Eq>' +
+        '<FieldRef Name="EventType" />' +
+        '<Value Type="Text">birthday</Value>' +
+        '</Eq>' +
+        '</And>' +
+        '</Or>' +
+        '<Gt>' +
+        '<FieldRef Name="Expires" />' +
+        '<Value Type="DateTime">' +
+        '<Today />' +
+        '</Value>' +
+        '</Gt>' +
+        '</Or>' +
+        '</And>' +
+        '<And>' +
+        '<And>' +
+        '<Eq>' +
+        '<FieldRef Name="EventMonth" />' +
+        '<Value Type="Number">' + nextEventMonth + '</Value>' +
+        '</Eq>' +
+        '<In>' +
+        '<FieldRef Name="EventDay" />' +
+        '<Values>' + _in_second + '</Values>' +
+        '</In>' +
+        '</And>' +
+        '<Or>' +
+        '<Or>' +
+        '<IsNull>' +
+        '<FieldRef Name="Expires" />' +
+        '</IsNull>' +
+        '<And>' +
+        '<IsNull>' +
+        '<FieldRef Name="EventType" />' +
+        '</IsNull>' +
+        '<Eq>' +
+        '<FieldRef Name="EventType" />' +
+        '<Value Type="Text">birthday</Value>' +
+        '</Eq>' +
+        '</And>' +
+        '</Or>' +
+        '<Gt>' +
+        '<FieldRef Name="Expires" />' +
+        '<Value Type="DateTime">' +
+        '<Today />' +
+        '</Value>' +
+        '</Gt>' +
+        '</Or>' +
+        '</And>' +
+        '</Or>';
+    }
+
+    //get items for currend date +- 3 days
+    let tempQuery = '<View><ViewFields>' +
+      '<FieldRef Name="ID"/><FieldRef Name="Title"/><FieldRef Name="EventType"/><FieldRef Name="BabyGender"/><FieldRef Name="EventAuthor"/><FieldRef Name="EventMonth"/><FieldRef Name="EventDay"/><FieldRef Name="Role"/><FieldRef Name="Expires"/>' +
+      (listName == this._newEmployeesListName ? '<FieldRef Name="Picture"/>' : '') +
+      '</ViewFields>' +
+      '<Query>' +
+      '<Where>' + _tempQuery +
+      '</Where>' +
+      '<OrderBy>' +
+      '<FieldRef Name="EventMonth" Ascending="TRUE" />' +
+      '<FieldRef Name="EventDay" Ascending="TRUE" />' +
+      '</OrderBy>' +
+      '</Query>' +
+      '<RowLimit>10000</RowLimit></View>';
+
+
+    return tempQuery;
+  }
+
+  //endregion
+  // Greetings
+  // html += `
+  //     <p id="LumenisGreetingsWpWebPartID" class="anchorinpage"></p>
+  //   <div class="event_wrapper"  id="greetingsWP">
+  //     <h3 class="WPtitle">${escape(this.properties.wpTitleGreetings)}</h3>
+  //     <div class="container WPevents" id="WPevents${thisTime}">
+  //         <div class="scrollEvents" id="scrollEvents${thisTime}"></div>
+  //     </div>
+  // </div>`;
 
 
   // protected get dataVersion(): Version {
@@ -316,16 +660,16 @@ export default class LumenisPhotoGalleryWpWebPart extends BaseClientSideWebPart<
             {
               groupName: 'Useful Links',
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: 'Useful Links'
+                PropertyPaneTextField('descriptionUsefulLinks', {
+                  label: 'Description field'
                 }),
-                PropertyPaneTextField('wpTitle', {
+                PropertyPaneTextField('wpTitle_UsefulLinks', {
                   label: 'Title'
                 }),
-                PropertyPaneTextField('listName', {
+                PropertyPaneTextField('listName_UsefulLinks', {
                   label: 'List name'
                 }),
-                PropertyPaneTextField('wpWebUrl', {
+                PropertyPaneTextField('wpWebUrl_UsefulLinks', {
                   label: 'Web URL'
                 })
               ]
@@ -453,6 +797,39 @@ export default class LumenisPhotoGalleryWpWebPart extends BaseClientSideWebPart<
                 }),
                 PropertyPaneTextField('Link9Text', {
                   label: 'Enter link description'
+                })
+              ]
+            },
+            // Greetings
+            {
+              groupName: 'Greetings',
+              groupFields: [
+                PropertyPaneTextField('descriptionGreetings', {
+                  label: 'Description field'
+                }),
+                PropertyPaneTextField('webUrlGreetings', {
+                  label: 'Web url'
+                }),
+                PropertyPaneTextField('listNameGreetings', {
+                  label: 'List name'
+                }),
+                PropertyPaneTextField('wpTitleGreetings', {
+                  label: 'Wp title'
+                }),
+                PropertyPaneTextField('sendYourGreetings', {
+                  label: 'Send your greetings'
+                }),
+                PropertyPaneTextField('separator', {
+                  label: 'Separator'
+                }),
+                PropertyPaneTextField('daysBefore', {
+                  label: 'Days before'
+                }),
+                PropertyPaneCheckbox('displayDate', {
+                  text: 'Display date'
+                }),
+                PropertyPaneTextField('daysAfter', {
+                  label: 'Days after'
                 })
               ]
             }
