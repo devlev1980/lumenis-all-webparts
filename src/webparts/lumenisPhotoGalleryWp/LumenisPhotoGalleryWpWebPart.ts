@@ -69,6 +69,24 @@ export interface ILumenisPhotoGalleryWpWebPartProps {
   daysBefore: string;
   daysAfter: string;
   displayDate: boolean;
+  // Photo gallery
+  photoGalleryTitle: string;
+  linksImagesTitle: string;
+  description: string;
+  photosLibraryName: string;
+  Link1PhotoGallery: string;
+  Link1TextPhotoGallery: string;
+  LinkImage1PhotoGallery: string;
+  Link2PhotoGallery: string;
+  Link2TextPhotoGallery: string;
+  //LinkImage2: string;
+  Link3PhotoGallery: string;
+  Link3TextPhotoGallery: string;
+  //LinkImage3: string;
+  Link4PhotoGallery: string;
+  Link4TextPhotoGallery: string;
+  //LinkImage4: string;
+
 }
 
 export interface ISPLists {
@@ -89,7 +107,7 @@ export interface ISPField {
 
 export default class LumenisPhotoGalleryWpWebPart extends BaseClientSideWebPart<ILumenisPhotoGalleryWpWebPartProps> {
   private _newEmployeesListName = 'NewEmployees';
-
+  private slideIndex: number = 1;
   public render(): void {
     let d = new Date();
     let thisTime = d.getTime();
@@ -142,16 +160,95 @@ export default class LumenisPhotoGalleryWpWebPart extends BaseClientSideWebPart<
                 <h1 class="title">מידע לעובדים</h1>
              </div>
        <div class="LinksWrapper-Raw">
-<div class="LinksTab">
+         <div class="LinksTab">
           <div class="LinkImage">
             <a href="${escape(this.properties.Link1)}"><img class="ImageInLink" src="${escape(this.properties.LinkImage1)}"></a>
           </div>
           <div class="LinkText">
             <a href="${escape(this.properties.Link1)}">${escape(this.properties.Link1Text)}</a>
           </div>
-        </div>`;
+</div>
 
+
+
+
+<!--      // <div id="PhotoGalleryWebpartWrapper">&ndash;&gt;// <div id="LinksImages">&ndash;&gt;-->`
+//       html += `<div class="LinksWrapper2">
+//                      <div class="LinksWrapper-Raw2" >
+//                      <h2  style="color: #040507";>${this.properties.linksImagesTitle}</h2>
+//                      <div class="raws-wrapper">` ;
+    //   if (this.properties.Link1PhotoGallery != "") {
+    //     html += `<div class="LinksTab2" >
+    //                                 <div class="LinkImage2" >
+    //                                   <a href="${escape(this.properties.Link1PhotoGallery)}">
+    //                                   <img class="ImageInLink2" width="100%"   src="${escape(this.properties.LinkImage1PhotoGallery)}">
+    //                                   </a>
+    //                                   <br>
+    //                                 </div>
+    //                               </div> `;
+    //   }
+    //   if (this.properties.Link2PhotoGallery != "") {
+    //     html += `<div class="LinksTab2">
+    //                                 <div class="LinkImage2">
+    //                                   <button type="button" class="ImageInLink2" onclick="location.href='${this.properties.Link2PhotoGallery}';">${this.properties.Link2TextPhotoGallery}</button>
+    //                                 </div>
+    //                               </div>`;
+    //   }
+    //   if (this.properties.Link3PhotoGallery != "") {
+    //     html += `<div class="LinksTab2">
+    //                                 <div class="LinkImage2">
+    //                                   <button type="button" class="ImageInLink2" onclick="location.href='${this.properties.Link3PhotoGallery}';">${this.properties.Link3TextPhotoGallery}</button>
+    //                                 </div>
+    //                               </div>`;
+    //   }
+    //   if (this.properties.Link4PhotoGallery != "") {
+    //     html += `<div class="LinksTab2">
+    //                                 <div class="LinkImage2">
+    //                                   <button type="button" class="ImageInLink2" onclick="location.href='${this.properties.Link4PhotoGallery}';">${this.properties.Link4TextPhotoGallery}</button>
+    //                                 </div>
+    //                               </div> </div>`;
+    //     html += `</div>
+    //
+    //                                <div id="PhotoGalleryTable">
+    //                                <div id="Title">
+    //                                <h2  style="color: #040507";>${this.properties.photoGalleryTitle}</h2>
+    //                                 </div>
+    //                                  <div style="width:100%;">
+    //                                  <div id="FileProperties">
+    //                                 </div>
+    //                                 <div id="slidesShow-Container">
+    //                                  </div>
+    //                                 <div id="after-slidesShow-Container">
+    //                                  </div>
+    //                                 </div>
+    //                                </div>
+    //
+    //                               </div
+    //                             </div>`;
+    //   }
+    //   let NumberOfActiveLinks = 0;
+    //   if (this.properties.Link1PhotoGallery != "") {
+    //     NumberOfActiveLinks += 1;
+    //   }
+    //   if (this.properties.Link2PhotoGallery != "") {
+    //     NumberOfActiveLinks += 1;
+    //   }
+    //   if (this.properties.Link3PhotoGallery != "") {
+    //     NumberOfActiveLinks += 1;
+    //   }
+    //   if (this.properties.Link4PhotoGallery != "") {
+    //     NumberOfActiveLinks += 1;
+    //   }
+    //   if (NumberOfActiveLinks != 0 && NumberOfActiveLinks != 8) {
+    //     NumberOfActiveLinks = (100 - 12.5 * NumberOfActiveLinks) / 2;
+    //   }
+    //   else NumberOfActiveLinks = 0;
     }
+
+
+
+
+
     if (this.properties.Link2 != '') {
       html += `<div class="LinksTab">
           <div class="LinkImage">
@@ -232,21 +329,23 @@ export default class LumenisPhotoGalleryWpWebPart extends BaseClientSideWebPart<
           </div>
         </div></div> </div>
 
-                          <!--        Right side bar-->
+
  <div class="right__sidebar">
-            <p id="LumenisGreetingsWpWebPartID" class="anchorinpage"></p>
-             <div class="event_wrapper" id="greetingsWP">
-                <h3 class="WPtitle">${escape(this.properties.wpTitleGreetings)}</h3>
-                <div class="container WPevents" id="WPevents${thisTime}">
-                <div class="scrollEvents" id="scrollEvents${thisTime}"></div>
+    <p id="LumenisGreetingsWpWebPartID" class="anchorinpage"></p>
+      <div class="event_wrapper" id="greetingsWP">
+    <h3 class="WPtitle">${escape(this.properties.wpTitleGreetings)}</h3>
+      <div class="container WPevents" id="WPevents${thisTime}">
+    <div class="scrollEvents" id="scrollEvents${thisTime}"></div>
 
-        </div>
-    </div>
+      </div>
+      </div>
+ </div>`
 
-</div> </div>'`;
     }
+
+
+
     let greetingsList = this.properties.listNameGreetings;
-    console.log('greetingsList',greetingsList);
     let query = this.Build(greetingsList);
     let webUrl = this.properties.webUrlGreetings;
     let sendYourGreetings = this.properties.sendYourGreetings;
@@ -260,11 +359,9 @@ export default class LumenisPhotoGalleryWpWebPart extends BaseClientSideWebPart<
       web = new Web(absUrl);
     }
     web.get().then((w) => {
-
       const q: any = {
         ViewXml: query
       };
-
       web.lists.getByTitle(greetingsList).getItemsByCAMLQuery(q).then((r: any[]) => {
         var _greetingsList = greetingsList;
         r.forEach((result) => {
@@ -376,7 +473,6 @@ export default class LumenisPhotoGalleryWpWebPart extends BaseClientSideWebPart<
           }
         });
       });
-
     }).catch((err) => {
       console.log(err);
     });
@@ -633,16 +729,113 @@ export default class LumenisPhotoGalleryWpWebPart extends BaseClientSideWebPart<
     return tempQuery;
   }
 
+  // Functions of photo gallery webpart
+  public static getAbsoluteDomainUrl(): string {
+    if (window
+      && "location" in window
+      && "protocol" in window.location
+      && "host" in window.location) {
+      return window.location.protocol + "//" + window.location.host;
+    }
+    return null;
+  }
+
+  private _getFiles(): Promise<ISPLists> {
+    return this.context.spHttpClient.get(this.context.pageContext.web.absoluteUrl + `/_api/Web/GetFolderByServerRelativeUrl('${escape(this.properties.photosLibraryName)}')?$expand=Files`, SPHttpClient.configurations.v1)
+      .then((response: SPHttpClientResponse) => {
+        return response.json();
+      });
+  }
+
+  private _getPropertiesFields() {
+    return this.context.spHttpClient.get(this.context.pageContext.web.absoluteUrl + `/_api/Web/GetFolderByServerRelativeUrl('${escape(this.properties.photosLibraryName)}')/Files?$select=ListItemAllFields/Date,ListItemAllFields/ImageTitle,ListItemAllFields/Link&$expand=ListItemAllFields`, SPHttpClient.configurations.v1)
+      .then((response: SPHttpClientResponse) => {
+        return response.json();
+      });
+  }
+
+  private _renderListAsync(): void {
+    if (Environment.type == EnvironmentType.SharePoint ||
+      Environment.type == EnvironmentType.ClassicSharePoint) {
+      this._getFiles()
+        .then((response) => {
+          this._renderList1(response.Files);
+        });
+      this._getPropertiesFields()
+        .then((response) => {
+          this._renderList2(response.value);
+        });
+    }
+  }
+
+  private _renderList1(items: ISPList[]): void {
+    let html: string = '';
+    let index: number = 0;
+    items.forEach((item: ISPList) => {
+      if (index == 0) {
+        html += `
+          <div class="image-item" style="border-left: 1px solid lightgray;">
+              <img src="${LumenisPhotoGalleryWpWebPart.getAbsoluteDomainUrl()}${item.ServerRelativeUrl}">
+          </div> <div class="divider"></div>`;
+
+      }
+      else {
+        html += `
+          <div class="image-item" style="border-left: 1px solid lightgray;"><img src="${LumenisPhotoGalleryWpWebPart.getAbsoluteDomainUrl()}${item.ServerRelativeUrl}"></div><div class="divider"></div>`;
+      }
+      index++;
+    });
+    const slidesShowContainer: Element = this.domElement.querySelector('#slidesShow-Container');
+    slidesShowContainer.innerHTML = html;
+
+    let btnNext = document.getElementById("prev");
+    btnNext.addEventListener("click", (e: Event) => this.plusSlides(-1));
+    let btnPrev = document.getElementById("next");
+    btnPrev.addEventListener("click", (e: Event) => this.plusSlides(1));
+  }
+
+  private _renderList2(items: ISPList[]): void {
+    let html: string = '';
+    let html2: string = '';
+    let num = -8.5;
+    const mySlides: Element = this.domElement.querySelector('#mySlides');
+    const slidesShowContainer: Element = this.domElement.querySelector('#FileProperties');
+    const afterSlidesShowContainer: Element = this.domElement.querySelector('#after-slidesShow-Container');
+
+    items.forEach((item: ISPList) => {
+      num = num + 10;
+      html += `
+          <div >
+          <img src="https://lumenis.sharepoint.com/sites/Portal/Site%20Assets/Homepage%20design/image%20gallery/icon_camera.jpg" alt="icon" style="float:right;">
+          <label>${item.ListItemAllFields.Date}</label>
+          <br><label>${item.ListItemAllFields.ImageTitle}</label></div>`;
+
+      html2 += `<div ><a href="${item.ListItemAllFields.Link}"> קרא עוד ></a></div>`;
+
+
+    });
+
+    slidesShowContainer.innerHTML = html;
+    afterSlidesShowContainer.innerHTML = html2;
+  }
+
+  private  plusSlides(n: number) {
+    this.showSlides(this.slideIndex += n);
+  }
+
+  private showSlides(n: number): void {
+    var i: number;
+    var slides = document.getElementsByClassName("mySlides");
+    if (n > slides.length) { this.slideIndex = 1; }
+    if (n < 1) { this.slideIndex = slides.length; }
+    for (i = 0; i < slides.length; i++) {
+      slides[i].setAttribute("style", "display:none;");
+    }
+    slides[this.slideIndex - 1].setAttribute("style", "display:block;");
+  }
+
   //endregion
-  // Greetings
-  // html += `
-  //     <p id="LumenisGreetingsWpWebPartID" class="anchorinpage"></p>
-  //   <div class="event_wrapper"  id="greetingsWP">
-  //     <h3 class="WPtitle">${escape(this.properties.wpTitleGreetings)}</h3>
-  //     <div class="container WPevents" id="WPevents${thisTime}">
-  //         <div class="scrollEvents" id="scrollEvents${thisTime}"></div>
-  //     </div>
-  // </div>`;
+
 
 
   // protected get dataVersion(): Version {

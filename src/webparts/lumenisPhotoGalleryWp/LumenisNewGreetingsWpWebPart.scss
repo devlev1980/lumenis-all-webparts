@@ -24,6 +24,7 @@ $title_background: #f0f0f0;
     font-size: 1.5rem;
     font-weight: 400;
     color: $main_color;
+    background: #ffffff;
   }
 
   .celebrant_detailes{
@@ -33,6 +34,7 @@ $title_background: #f0f0f0;
     border-bottom: 3px solid $white_color;
     padding:5px 5px 5px 2px ;
     font-weight:700;
+    background: $background;
   }
   .evt_ic{
     flex: 0 0 20%;
