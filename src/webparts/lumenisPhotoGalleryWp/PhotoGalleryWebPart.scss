@@ -24,23 +24,27 @@ $title_background: #f0f0f0;
       h2{
         margin-bottom: 0;
       }
-      .LinkImage2 {
-        width: 100%;
-        margin-bottom:10px;
-        button {
-          box-shadow: none;
-          border: 0;
-          background: rgba(229, 234, 242, 1);
-          font-weight: 400;
-          padding: 0.4rem;
-          font-size: 15px;
-
-        }
-        img,button {
+      .LinksTab2{
+        .LinkImage2 {
           width: 100%;
-          border-radius: 10px;
+          margin-bottom:10px;
+          button {
+            box-shadow: none;
+            border: 0;
+            background: rgba(229, 234, 242, 1);
+            font-weight: 400;
+            padding: 0.4rem;
+            font-size: 15px;
+            width: 100%;
+
+          }
+          img,button {
+            width: 100%;
+            border-radius: 10px;
+          }
         }
       }
+
     }
 
   }

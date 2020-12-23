@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d1da62cc-9d30-4f74-b743-524e286a05be" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/webparts/lumenisPhotoGalleryWp/LumenisNewGreetingsWpWebPart.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/webparts/lumenisPhotoGalleryWp/LumenisNewGreetingsWpWebPart.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/webparts/lumenisPhotoGalleryWp/LumenisPhotoGalleryWpWebPart.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/webparts/lumenisPhotoGalleryWp/LumenisPhotoGalleryWpWebPart.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/webparts/lumenisPhotoGalleryWp/LumenisPhotoGalleryWpWebPart.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/webparts/lumenisPhotoGalleryWp/LumenisPhotoGalleryWpWebPart.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/webparts/lumenisPhotoGalleryWp/PhotoGalleryWebPart.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/webparts/lumenisPhotoGalleryWp/PhotoGalleryWebPart.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +26,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="TypeScript" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/webparts/lumenisPhotoGalleryWp" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
@@ -51,7 +52,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1608448490462</updated>
-      <workItem from="1608448493688" duration="35126000" />
+      <workItem from="1608448493688" duration="55766000" />
     </task>
     <task id="LOCAL-00001" summary="add project">
       <created>1608467273442</created>
@@ -67,7 +68,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608479400855</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="fixing css container">
+      <created>1608539254471</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1608539254525</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -76,7 +84,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add project" />
     <MESSAGE value="adding Useful webparts + Quick Links + Greetings" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding Useful webparts + Quick Links + Greetings" />
+    <MESSAGE value="fixing css container" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing css container" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

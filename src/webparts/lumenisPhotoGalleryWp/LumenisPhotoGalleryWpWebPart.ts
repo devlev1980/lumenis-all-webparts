@@ -22,7 +22,7 @@ require('./LumenisNewUsefulLinksWebpart.scss');
 require('./QuckLinksWebPart..scss');
 require('./LumenisNewGreetingsWpWebPart.scss');
 //  require('./LumenisPhotoGalleryWpWebPart.module.scss');
-// require('./PhotoGalleryWebPart.scss');
+require('./PhotoGalleryWebPart.scss');
 
 
 export interface ILumenisPhotoGalleryWpWebPartProps {
@@ -108,6 +108,7 @@ export interface ISPField {
 export default class LumenisPhotoGalleryWpWebPart extends BaseClientSideWebPart<ILumenisPhotoGalleryWpWebPartProps> {
   private _newEmployeesListName = 'NewEmployees';
   private slideIndex: number = 1;
+
   public render(): void {
     let d = new Date();
     let thisTime = d.getTime();
@@ -137,7 +138,6 @@ export default class LumenisPhotoGalleryWpWebPart extends BaseClientSideWebPart<
     if (this.properties.Link8 != '') {
       NumberOfActiveLinks += 1;
     }
-
     if (NumberOfActiveLinks != 0 && NumberOfActiveLinks != 8) {
       NumberOfActiveLinks = (100 - 12.5 * NumberOfActiveLinks) / 2;
     } else NumberOfActiveLinks = 0;
@@ -167,88 +167,8 @@ export default class LumenisPhotoGalleryWpWebPart extends BaseClientSideWebPart<
           <div class="LinkText">
             <a href="${escape(this.properties.Link1)}">${escape(this.properties.Link1Text)}</a>
           </div>
-</div>
-
-
-
-
-<!--      // <div id="PhotoGalleryWebpartWrapper">&ndash;&gt;// <div id="LinksImages">&ndash;&gt;-->`
-//       html += `<div class="LinksWrapper2">
-//                      <div class="LinksWrapper-Raw2" >
-//                      <h2  style="color: #040507";>${this.properties.linksImagesTitle}</h2>
-//                      <div class="raws-wrapper">` ;
-    //   if (this.properties.Link1PhotoGallery != "") {
-    //     html += `<div class="LinksTab2" >
-    //                                 <div class="LinkImage2" >
-    //                                   <a href="${escape(this.properties.Link1PhotoGallery)}">
-    //                                   <img class="ImageInLink2" width="100%"   src="${escape(this.properties.LinkImage1PhotoGallery)}">
-    //                                   </a>
-    //                                   <br>
-    //                                 </div>
-    //                               </div> `;
-    //   }
-    //   if (this.properties.Link2PhotoGallery != "") {
-    //     html += `<div class="LinksTab2">
-    //                                 <div class="LinkImage2">
-    //                                   <button type="button" class="ImageInLink2" onclick="location.href='${this.properties.Link2PhotoGallery}';">${this.properties.Link2TextPhotoGallery}</button>
-    //                                 </div>
-    //                               </div>`;
-    //   }
-    //   if (this.properties.Link3PhotoGallery != "") {
-    //     html += `<div class="LinksTab2">
-    //                                 <div class="LinkImage2">
-    //                                   <button type="button" class="ImageInLink2" onclick="location.href='${this.properties.Link3PhotoGallery}';">${this.properties.Link3TextPhotoGallery}</button>
-    //                                 </div>
-    //                               </div>`;
-    //   }
-    //   if (this.properties.Link4PhotoGallery != "") {
-    //     html += `<div class="LinksTab2">
-    //                                 <div class="LinkImage2">
-    //                                   <button type="button" class="ImageInLink2" onclick="location.href='${this.properties.Link4PhotoGallery}';">${this.properties.Link4TextPhotoGallery}</button>
-    //                                 </div>
-    //                               </div> </div>`;
-    //     html += `</div>
-    //
-    //                                <div id="PhotoGalleryTable">
-    //                                <div id="Title">
-    //                                <h2  style="color: #040507";>${this.properties.photoGalleryTitle}</h2>
-    //                                 </div>
-    //                                  <div style="width:100%;">
-    //                                  <div id="FileProperties">
-    //                                 </div>
-    //                                 <div id="slidesShow-Container">
-    //                                  </div>
-    //                                 <div id="after-slidesShow-Container">
-    //                                  </div>
-    //                                 </div>
-    //                                </div>
-    //
-    //                               </div
-    //                             </div>`;
-    //   }
-    //   let NumberOfActiveLinks = 0;
-    //   if (this.properties.Link1PhotoGallery != "") {
-    //     NumberOfActiveLinks += 1;
-    //   }
-    //   if (this.properties.Link2PhotoGallery != "") {
-    //     NumberOfActiveLinks += 1;
-    //   }
-    //   if (this.properties.Link3PhotoGallery != "") {
-    //     NumberOfActiveLinks += 1;
-    //   }
-    //   if (this.properties.Link4PhotoGallery != "") {
-    //     NumberOfActiveLinks += 1;
-    //   }
-    //   if (NumberOfActiveLinks != 0 && NumberOfActiveLinks != 8) {
-    //     NumberOfActiveLinks = (100 - 12.5 * NumberOfActiveLinks) / 2;
-    //   }
-    //   else NumberOfActiveLinks = 0;
+</div>`
     }
-
-
-
-
-
     if (this.properties.Link2 != '') {
       html += `<div class="LinksTab">
           <div class="LinkImage">
@@ -319,18 +239,86 @@ export default class LumenisPhotoGalleryWpWebPart extends BaseClientSideWebPart<
           </div>
         </div>`;
     }
-    if (this.properties.Link9 != '') {
-      html += `<div class="LinksTab">
-          <div class="LinkImage">
-            <a href="${escape(this.properties.Link9)}"><img class="ImageInLink" src="${escape(this.properties.LinkImage9)}"></a>
-          </div>
-          <div class="LinkText">
-            <a href="${escape(this.properties.Link9)}">${escape(this.properties.Link9Text)}</a>
-          </div>
-        </div></div> </div>
 
 
- <div class="right__sidebar">
+    // let html2 = '<h1>aaa</h1>'
+    html += `<div class="LinksTab">
+        <div class="LinkImage">
+          <a href="${escape(this.properties.Link9)}"><img class="ImageInLink" src="${escape(this.properties.LinkImage9)}"></a>
+        </div>
+        <div class="LinkText">
+          <a href="${escape(this.properties.Link9)}">${escape(this.properties.Link9Text)}</a>
+        </div>
+
+
+      </div></div>
+            Photo gallery here
+            `
+    {
+      html+= `<div id="PhotoGalleryWebpartWrapper">
+                 <div id="LinksImages">
+<div class="LinksWrapper2">
+                     <div class="LinksWrapper-Raw2" ><h2  style="color: #040507";>${this.properties.linksImagesTitle}</h2><div class="raws-wrapper">` ;
+    if (this.properties.Link1PhotoGallery != "") {
+      html += `<div class="LinksTab2" >
+                                    <div class="LinkImage2" >
+                                      <a href="${escape(this.properties.Link1PhotoGallery)}">
+                                      <img class="ImageInLink2" width="100%"   src="${escape(this.properties.LinkImage1PhotoGallery)}">
+                                      </a>
+                                      <br>
+                                    </div>
+                                  </div> `;
+    }
+    if (this.properties.Link2PhotoGallery != "") {
+      html += `<div class="LinksTab2">
+                                    <div class="LinkImage2">
+                                      <button type="button" class="ImageInLink2" onclick="location.href='${this.properties.Link2PhotoGallery}';">${this.properties.Link2TextPhotoGallery}</button>
+                                    </div>
+                                  </div>`;
+                                  // <a href="${escape(this.properties.Link2)}"><img class="ImageInLink2" style="width: 11.3vw; height: 1.58vw;" src="${escape(this.properties.LinkImage2)}"></a><br>
+    }
+    if (this.properties.Link3PhotoGallery != "") {
+      html += `<div class="LinksTab2">
+                                    <div class="LinkImage2">
+                                      <button type="button" class="ImageInLink2" onclick="location.href='${this.properties.Link3PhotoGallery}';">${this.properties.Link3TextPhotoGallery}</button>
+                                    </div>
+                                  </div>`;
+                                  // <a href="${escape(this.properties.Link3)}"><img class="ImageInLink2" style="width: 11.3vw; height: 1.58vw;" src="${escape(this.properties.LinkImage3)}"></a><br>
+    }
+    if (this.properties.Link4PhotoGallery != "") {
+      html += `<div class="LinksTab2">
+                                    <div class="LinkImage2">
+                                      <button type="button" class="ImageInLink2" onclick="location.href='${this.properties.Link4PhotoGallery}';">${this.properties.Link4TextPhotoGallery}</button>
+                                    </div>
+                                  </div> </div>`;
+                                  // <a href="${escape(this.properties.Link4)}"><img class="ImageInLink2" style="width: 11.3vw; height: 1.58vw;" src="${escape(this.properties.LinkImage4)}"></a><br>
+
+      html += `</div>
+
+                                   <div id="PhotoGalleryTable">
+                                   <div id="Title">
+                                   <h2  style="color: #040507";>${this.properties.photoGalleryTitle}</h2>
+                                    </div>
+                                     <div style="width:100%;">
+                                     <div id="FileProperties">
+                                    </div>
+                                    <div id="slidesShow-Container">
+                                     </div>
+                                    <div id="after-slidesShow-Container">
+                                     </div>
+                                    </div>
+                                   </div>
+
+                                  </div
+                                </div>
+
+
+      </div>
+      </div>
+      </div>
+<!--Right sidebar-->
+ `;{
+ html +=`<div class="right__sidebar">
     <p id="LumenisGreetingsWpWebPartID" class="anchorinpage"></p>
       <div class="event_wrapper" id="greetingsWP">
     <h3 class="WPtitle">${escape(this.properties.wpTitleGreetings)}</h3>
@@ -340,11 +328,48 @@ export default class LumenisPhotoGalleryWpWebPart extends BaseClientSideWebPart<
       </div>
       </div>
  </div>`
+ }`
+`;
+    }
+      this._renderListAsync();
+      let NumberOfActiveLinks = 0;
+      if (this.properties.Link1PhotoGallery != "") {
+        NumberOfActiveLinks += 1;
+      }
+      if (this.properties.Link2PhotoGallery != "") {
+        NumberOfActiveLinks += 1;
+      }
+      if (this.properties.Link3PhotoGallery != "") {
+        NumberOfActiveLinks += 1;
+      }
+      if (this.properties.Link4PhotoGallery != "") {
+        NumberOfActiveLinks += 1;
+      }
 
+      if (NumberOfActiveLinks != 0 && NumberOfActiveLinks != 8) {
+        NumberOfActiveLinks = (100 - 12.5 * NumberOfActiveLinks) / 2;
+      }
+      else NumberOfActiveLinks = 0;
+
+      let MarginLeft = NumberOfActiveLinks.toString() + "%";
     }
 
 
+      `
 
+
+  `;
+
+
+
+
+
+// <!--// html +=--> `
+//     this.domElement.innerHTML = html;
+
+
+
+//============================================== Greetings Logic ===================================================
     let greetingsList = this.properties.listNameGreetings;
     let query = this.Build(greetingsList);
     let webUrl = this.properties.webUrlGreetings;
@@ -479,7 +504,7 @@ export default class LumenisPhotoGalleryWpWebPart extends BaseClientSideWebPart<
     this.domElement.innerHTML = html;
     this.renderLinks();
   }
-
+// ===========================================Useful Links Logic=======================================================
   private renderLinks() {
     let webUrl = this.properties.wpWebUrl_UsefulLinks;
     let usefulLinksList = this.properties.listName_UsefulLinks;
@@ -729,7 +754,7 @@ export default class LumenisPhotoGalleryWpWebPart extends BaseClientSideWebPart<
     return tempQuery;
   }
 
-  // Functions of photo gallery webpart
+  // =======================================Functions of photo gallery webpart=====================================
   public static getAbsoluteDomainUrl(): string {
     if (window
       && "location" in window
@@ -1024,6 +1049,65 @@ export default class LumenisPhotoGalleryWpWebPart extends BaseClientSideWebPart<
                 PropertyPaneTextField('daysAfter', {
                   label: 'Days after'
                 })
+              ]
+            },
+            // Photo gallery
+
+            {
+              groupFields: [
+                PropertyPaneTextField('photoGalleryTitle', {
+                  label: 'Enter photos gallery element title'
+                }),
+                PropertyPaneTextField('photosLibraryName', {
+                  label: 'Enter photos library name'
+                })
+              ]
+            },
+            {
+              groupName: 'Link 1',
+              groupFields: [
+                PropertyPaneTextField('linksImagesTitle', {
+                  label: 'Enter links images element title'
+                }),
+                PropertyPaneTextField('Link1PhotoGallery', {
+                  label: 'Enter link to page'
+                }),
+                PropertyPaneTextField('LinkImage1PhotoGallery', {
+                  label: 'Enter link to image'
+                }),
+              ]
+            },
+            {
+              groupName: 'Link 2',
+              groupFields: [
+                PropertyPaneTextField('Link2PhotoGallery', {
+                  label: 'Enter link to page'
+                }),
+                PropertyPaneTextField('Link2TextPhotoGallery', {
+                  label: 'Enter text to display'
+                }),
+              ]
+            },
+            {
+              groupName: 'Link 3',
+              groupFields: [
+                PropertyPaneTextField('Link3PhotoGallery', {
+                  label: 'Enter link to page'
+                }),
+                PropertyPaneTextField('Link3TextPhotoGallery', {
+                  label: 'Enter text to display'
+                }),
+              ]
+            },
+            {
+              groupName: 'Link 4',
+              groupFields: [
+                PropertyPaneTextField('Link4PhotoGallery', {
+                  label: 'Enter link to page'
+                }),
+                PropertyPaneTextField('Link4TextPhotoGallery', {
+                  label: 'Enter text to display'
+                }),
               ]
             }
           ]
